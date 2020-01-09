@@ -32,39 +32,45 @@
 
 .provider-list .item .video { 
     pointer-events: none; opacity: 0;
-    position: absolute; overflow: hidden; 
+    position: absolute;
     width: 250px; height: 150px; border-radius: 5px; z-index: 1;
     box-shadow: 0 0 10px 6px #00000050;
+    background-color: #fff;
     transition: opacity 0.25s, transform 0.25s;
 }
 .provider-list .item .video:nth-of-type(1) { left: 180px; top: 170px; transform: translate(50px, -50px); }
 .provider-list .item .video:nth-of-type(2) { left: 50px; top: 300px; transform: translate(-50px, 50px); }
 .provider-list .item .video:nth-of-type(3) { left: 20px; top: 30px; transform: translate(-50px, -50px); }
 
-.provider-list .item .video img { width: 100%; height: 100%; }
-.provider-list .item .video:hover .v-info { top: 30px; opacity: 1; }
+.provider-list .item .video img { position: relative; z-index: 1; width: 250px; height: 100%; }
+.provider-list .item .video:hover .v-info { opacity: 1; }
 .provider-list .item .video .v-info { 
-    width: 100%; height: calc(100% - 30px);
-    position: absolute; left: 0; top: 100%; opacity: 0;
-    padding: 10px; background-color: #ffffffce;
-    transition: top 0.5s, opacity 0.5s;
+    width: 250px; height: 100%;
+    position: absolute; left: 230px; top: 30px; opacity: 0;
+    padding: 10px; background-color: #fff;
+    transition: opacity 0.5s, left 0.5s;
+    box-shadow: 0 0 10px 5px #00000020;
+    pointer-events: none;
 }
 .provider-list .item .video .no-video {
     width: 250px; height: 150px; line-height: 150px;
     background-color: #202020; color: #fff;
     text-align: center;
 }
-
 .provider-list .item .video .v-info p {
     font-size: 0.9em;
-    height: 2.4em;
+    height: 3.6em;
     line-height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.provider-list .item .video:hover .v-info { opacity: 1; left: 280px; }
+
+
 
 .provide-box:checked + .item { height: 500px; }
 .provide-box:checked + .item .info { background: transparent }
@@ -85,6 +91,7 @@
 .provide-box:checked + .item .video.video:nth-of-type(3) { transition-delay: 0.75s; }
 
 
+/* 회사 자세히 보기 */
 
 .provide-header { height: 300px; }
 .provide-header .info { background: transparent; }
@@ -96,6 +103,47 @@
 .video-list .item { padding: 20px; transition: transform 0.3s; }
 .video-list .item:hover { box-shadow: 0 0 10px 5px #00000010; transform: scale(1.05) }
 .video-list .item p {
+    line-height: 1.5em;
+    height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+/* 추천 영상 리스트 */
+
+
+#bookmark .provider-list .item { margin: 20px 0; transition: margin-bottom 0.5s, height 0.5s; }
+#bookmark .provider-list .item:hover { height: 150px; }
+#bookmark .provider-list .item:hover .info { background: #ffffffce; }
+#bookmark .provide-box:checked + .item .info { background: #ffffffce; }
+#bookmark .provide-box:checked + .item { height: 250px; }
+#bookmark .provide-box:checked + .item .recommand-list > .r-item { 
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+#bookmark .recommand-list {
+    position: absolute; left: 100px; top: calc(100% + 50px);
+    width: calc(100% - 100px); 
+    display: flex; flex-direction: column;
+    /* pointer-events: none; */
+}
+
+#bookmark .recommand-list .r-item {
+    width: 100%; height: 250px;
+    padding: 20px;
+    transform: translateX(-100px);
+    opacity: 0;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+#bookmark .thumbnail { width: 350px; height: 200px; }
+#bookmark .r-info { width: calc(100% - 350px); }
+
+#bookmark .recommand-list .r-item p {
     line-height: 1.5em;
     height: 7.5em;
     overflow: hidden;

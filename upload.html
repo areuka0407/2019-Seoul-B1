@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Busan Film</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <script src="fontawesome/js/all.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <div id="visual" class="sub">
+        <header>
+            <div class="inline">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="부산국제영화제 Busan International Film Festival" height="180">
+                </a>
+                <nav>
+                    <div class="main-nav mr-5">
+                        <div class="item"><a href="provider_list.html">PROVIDER</a></div>
+                        <div class="item"><a href="#">BOOKMARK</a></div>
+                        <div class="item"><a href="#">UPLOAD</a></div>
+                        <div class="item"><a href="mypage.html">MYLIST</a></div>
+                    </div>
+                    <div class="sub-nav">
+                        <div class="item mr-3"><a href="#">로그인</a></div>
+                        <div class="item"><a href="#">회원가입</a></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="images">
+            <div class="item image-3"></div>
+            <div class="item image-2"></div>
+            <div class="item image-1"></div>
+        </div>
+        <div class="contents">
+            <div class="item">
+                <div class="sub">2019년 부산국제영화제를 함께 만들어갈 여러분을 기다립니다.</div>
+                <div class="main">Create Various Contents</div>
+            </div>
+            <div class="item">
+                <div class="sub">최상의 콘텐츠를 세상에 선보이기 위해 끊임없이 새로운 도전을 합니다.</div>
+                <div class="main">Challenge Makes New Movie</div>
+            </div>
+            <div class="item">
+                <div class="sub">전 세계 누구나 공감할 수 있는 영화로 글로벌 소통합니다.</div>
+                <div class="main">Going Global and Beyond</div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="css/upload.css">
+    <div class="container">
+        <div class="padding">
+            <div class="section-header">
+                <h5>예고편 업로드</h5>
+                <h1>Teaser Video Upload</h1>
+            </div>
+            <form id="upload-form" method="post" enctype="multipart/form-data" class="d-flex flex-column">
+                <div class="form-group">
+                    <label for="thumbnail">섬네일 이미지</label>
+                    <small class="text-muted pl-3">하단 영역을 클릭하거나 영상을 업로드하면 섬네일을 추출할 수 있습니다.</small>
+                    <label label="thumbnail" class="thumbnail mb-5 mt-2">
+                        <input type="file" id="thumbnail" name="thumbnail" hidden>
+                    </label>
+                </div>
+                <div class="col-md-12 form-group mt-3">
+                    <label for="title">제목</label>
+                    <input type="text" id="title" name="title" class="form-control">
+                </div>
+                <div class="col-md-12 form-group mt-3">
+                    <label for="description">설명</label>
+                    <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                </div>
+                <div class="col-md-12 form-group mt-3">
+                    <label for="video-file">동영상 파일</label>
+                    <div class="custom-file">
+                        <label for="video-file" class="custom-file-label">파일을 선택해 주세요...</label>
+                        <input type="file" id="video-file" name="video-file" class="custom-file-input">
+                    </div>
+                </div>
+                <div class="col-md-12 form-group mt-3 d-flex align-items-center">
+                    <label for="allow-download" style="margin: 0;">다운로드 허용</label>
+                    <input type="checkbox" name="allow-download" class="ml-3">
+                </div>
+                <button type="submit" class="mt-5 ml-3 btn btn-red">업로드</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/upload.js"></script>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="footer-title">Quick Link</h5>
+                    <div class="d-flex">
+                        <ul class="mr-5">
+                            <li>영화 배급사</li>
+                            <li>추천영화 리스트</li>
+                            <li>업로드</li>
+                            <li>마이리스트</li>
+                        </ul>
+                        <ul>
+                            <li>부서별 연락처</li>
+                            <li>1:1 문의</li>
+                            <li>개인정보처리방침</li>
+                            <li>저작권정책</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="footer-title">Address</div>
+                    <div class="d-flex">
+                        <div class="address mr-4">
+                            <h5 class="mb-4">부산사무국 (48058)</h5>
+                            <p>부산시 해운대구 수영강변대로 120 영화의전당 비프힐 3층</p>
+                            <p>전화 : 1688-3010 | Fax : 051-709-2299</p>
+                        </div>
+                        <div class="address">
+                            <h5 class="mb-4">서울사무소 (03131)</h5>
+                            <p>서울특별시 종로구 율곡로 84 가든타워 1601호</p>
+                            <p>전화 02-3675-5097 | Fax : 02-3675-5098</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright col-md-12 text-center">
+                    Copyright ⓒ 2019 Busan Flim. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Busan Film</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <script src="fontawesome/js/all.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/data.js"></script>
+</head>
+<body>
+    <div id="visual" class="sub">
+        <header>
+            <div class="inline">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="부산국제영화제 Busan International Film Festival" height="180">
+                </a>
+                <nav>
+                    <div class="main-nav mr-5">
+                        <div class="item"><a href="provider_list.html">PROVIDER</a></div>
+                        <div class="item"><a href="recommand.html">BOOKMARK</a></div>
+                        <div class="item"><a href="upload.html">UPLOAD</a></div>
+                        <div class="item"><a href="mypage.html">MYLIST</a></div>
+                    </div>
+                    <div class="sub-nav">
+                        <div class="item mr-3"><a href="#">로그인</a></div>
+                        <div class="item"><a href="#">회원가입</a></div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="images">
+            <div class="item image-3"></div>
+            <div class="item image-2"></div>
+            <div class="item image-1"></div>
+        </div>
+        <div class="contents">
+            <div class="item">
+                <div class="sub">2019년 부산국제영화제를 함께 만들어갈 여러분을 기다립니다.</div>
+                <div class="main">Create Various Contents</div>
+            </div>
+            <div class="item">
+                <div class="sub">최상의 콘텐츠를 세상에 선보이기 위해 끊임없이 새로운 도전을 합니다.</div>
+                <div class="main">Challenge Makes New Movie</div>
+            </div>
+            <div class="item">
+                <div class="sub">전 세계 누구나 공감할 수 있는 영화로 글로벌 소통합니다.</div>
+                <div class="main">Going Global and Beyond</div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="css/provider.css">
+    <div id="bookmark" class="container">
+        <div class="padding">
+            <div class="section-header">
+                <h5>추천한 영상 목록</h5>
+                <h1>Bookmark</h1>
+            </div>
+            <div class="provider-list col-md-12 mt-5"></div>
+        </div>
+    </div>
+
+    <script>
+        Number.prototype.toTimeString = function(){
+            let hour = parseInt(this / 60);
+            let min = this % 60;
+            return `${hour}시간 ${min}분`;
+        };
+
+        Date.prototype.compareNow = function(){
+            let current = new Date();
+            let seconds = current.getSeconds();
+            let minutes = current.getMinutes();
+            let hours = current.getHours();
+            let date = current.getDate();
+            let month = current.getMonth();
+            let year = current.getFullYear();
+            
+            let before_3Y = new Date(year - 3, month);
+            let before_1M = new Date(year, month - 1, date);
+            let before_1W = new Date(year, month, date - 7, hours, minutes);
+            let before_1D = new Date(year, month, date - 1, hours, minutes);
+            let before_1H = new Date(year, month, date, hours - 1, minutes);
+            let before_30S = new Date(year, month, date, hours, minutes, seconds - 30);
+            
+            if(before_3Y >= this) return "3년 전";
+            else if(before_1M >= this) return "1달 전";
+            else if(before_1W >= this) return "1주 전";
+            else if(before_1D >= this) return "1일 전";
+            else if(before_1H >= this) return "1시간 전";
+            else if(before_30S >= this) return "30초 전";
+            else return "1초 전";
+        };
+
+        const login_id = 1;
+
+        let recommendList = data.recommends.filter(item => item.user_idx === login_id).map(x => x.video_idx);
+        let userList = data.users.map(user => {
+            user.videoList = data.videos.filter(video => video.users_id === user.idx && recommendList.includes(video.idx));
+            return user;
+        });
+
+        let viewList = userList.filter(user => user.videoList.length > 0);
+        
+        const $provideList = document.querySelector(".provider-list");
+        viewList.forEach((item, idx) => {
+
+            let $html = `<div>
+                            <input type="checkbox" id="provider-${idx}" class="provide-box" name="provide" hidden>
+                            <label for="provider-${idx}" class="item" style="background-image: url(images/${item.img})">
+                                <div class="info">
+                                    <h5 class="item-title">${item.name}</h5>
+                                    <p class="follower text-muted mt-3">팔로워<span class="ml-3">${item.follows.toLocaleString()}명</span></p>
+                                    <p class="follower text-muted mt-3">추천한 영상<span class="ml-3">${item.videoList.length.toLocaleString()}개</span></p>
+                                </div>
+                                <a href="provider.html" class="btn btn-red">자세히 보기</a>
+                                <div class="recommand-list">`;
+            item.videoList.forEach(video => {
+                let date = new Date(video.date);
+                video.description.replace("\n", "<br>");
+                $html += `<a href="video.html" class="r-item">
+                                <img src="images/${video.thumbnail}" alt="thumbnail-image" class="thumbnail" width="350" height="200">
+                                <div class="r-info ml-4">
+                                    <h5 class="title font-weight-bold mb-3">${video.title}</h5>
+                                    <span class="text-muted">${video.duration.toTimeString()}</span>
+                                    <span class="text-muted pl-2">조회 수: ${video.view.toLocaleString()}</span>
+                                    <span class="text-muted pl-2">등록일: ${date.compareNow()}</span>
+                                    <p class="mt-3">${video.description}</p>
+                                </div>
+                            </a>`;
+            });
+            
+            $html += `</div>
+                    </label>
+                </div>`;
+            
+            $html = $($html)[0];
+        
+            $html.querySelector(".provide-box").addEventListener("change", e => {
+                    if(e.target.checked) {
+                        $html.querySelector("label.item").style.marginBottom = item.videoList.length * 300 + 50 + "px";
+                        $html.querySelectorAll(".r-item").forEach((x, i) =>{
+                            setTimeout(() => {
+                                x.style.opacity = "1";
+                                x.style.transform = "translate(0)";    
+                            }, (i + 1) * 250 + 500);
+                        });
+                    }
+                    else {
+                        $html.querySelectorAll(".r-item").forEach((x, i) =>{
+                            $html.querySelector("label.item").style.marginBottom = "0";
+                            setTimeout(() => {
+                                x.style.opacity = "0";
+                                x.style.transform = "translate(-100px)";
+                                
+                            }, i * 250);
+                        });
+                    }
+                
+            });
+
+            $provideList.append($html);
+        }); 
+    </script>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="footer-title">Quick Link</h5>
+                    <div class="d-flex">
+                        <ul class="mr-5">
+                            <li>영화 배급사</li>
+                            <li>추천영화 리스트</li>
+                            <li>업로드</li>
+                            <li>마이리스트</li>
+                        </ul>
+                        <ul>
+                            <li>부서별 연락처</li>
+                            <li>1:1 문의</li>
+                            <li>개인정보처리방침</li>
+                            <li>저작권정책</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="footer-title">Address</div>
+                    <div class="d-flex">
+                        <div class="address mr-4">
+                            <h5 class="mb-4">부산사무국 (48058)</h5>
+                            <p>부산시 해운대구 수영강변대로 120 영화의전당 비프힐 3층</p>
+                            <p>전화 : 1688-3010 | Fax : 051-709-2299</p>
+                        </div>
+                        <div class="address">
+                            <h5 class="mb-4">서울사무소 (03131)</h5>
+                            <p>서울특별시 종로구 율곡로 84 가든타워 1601호</p>
+                            <p>전화 02-3675-5097 | Fax : 02-3675-5098</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright col-md-12 text-center">
+                    Copyright ⓒ 2019 Busan Flim. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
