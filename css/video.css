@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.video-player { position: relative; background-color: #000; height: 600px; }
+.video-player video { position: absolute; width: 100%; height: calc(100% - 50px); left: 0; top: 0; }
+.video-player .control-bar {
+    position: absolute; left: 0; bottom: 0;
+    width: 100%; height: 50px;
+    background-color: #000000dd;
+    z-index: 10; display: flex;
+}
+.video-player .control-bar button {
+    background: none; border: 0; color: #fff; 
+    width: 50px; height: 50px; outline: 0;
+}
+.video-player .control-bar button * { color: #fff; }
+
+#time-line { margin-left: 25px; width: calc(100% - 400px); -webkit-appearance: none; background-color: transparent; }
+#time-line:focus { outline: 0; }
+#time-line::-webkit-slider-runnable-track { 
+    border-radius: 2.5px; height: 5px; background-color: #ffffff50;
+}
+#time-line::-webkit-slider-thumb {
+    width: 15px; height: 15px; 
+    border-radius: 50%;
+    margin-top: -5px;
+    box-shadow: 0 0 10px 5px #00000050;
+    background-color: #fff;
+    -webkit-appearance: none;
+}
+.video-player .volume { width: 150px; height: 50px; display: flex; }
+.video-player .icon { width: 50px; height: 50px; line-height: 50px; text-align: center; }
+.video-player .icon * { color: #fff; }
+
+#volume-line { width: 100px; -webkit-appearance: none; background: none; }
+#volume-line:focus { outline: 0; }
+#volume-line::-webkit-slider-runnable-track { -webkit-appearance: none; height: 5px; background-color: #ffffff50; border-radius: 2.5px; }
+#volume-line::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px; height: 10px;
+    margin-top: -2px; transform: rotate(45deg);
+    background-color: #fff;
+}
+
+
+.video-info { margin-bottom: 80px; }
+.video-info .description { line-height: 1.5em; }
+
+.provide-info  {
+    position: relative; display: flex; height: 200px;
+    box-shadow: 0 0 10px 5px #00000020; 
+    background-size: auto 400px;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.provide-info .info .title { font-weight: 900; color: var(--red); font-size: 1.5em; }
+
+.provide-info .info {
+    position: absolute; left: 0; top:0;
+    width: 100%; height: 100%;
+    background-color: #ffffffce;
+    padding: 30px;
+}
+
+.provide-info a, .provide-info a:hover { color: #fff; }
+.provide-info svg path { color: #fff; fill: #fff; }
+
+.reply-list .item { border: 1px solid #ddd; padding: 30px; border-bottom: 0; }
+.reply-list .item:last-child { border-bottom: 1px solid #ddd; }

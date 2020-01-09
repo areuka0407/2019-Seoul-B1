@@ -1,16 +1,17 @@
 @charset "UTF-8";
 
-.provider-list .item { 
+.provider-list .item, .provide-header { 
     position: relative; display: flex; height: 150px;
     box-shadow: 0 0 10px 5px #00000020; 
     background-size: auto 500px;
     background-position: right 50%;
     background-repeat: no-repeat;
     transition: height 0.5s;
+    border-radius: 5px;
     cursor: pointer;
  }
 .provider-list .item img { width: 100px; height: 100px; }
-.provider-list .item .info { 
+.provider-list .item .info, .provide-header .info { 
     position: absolute; left: 0; top:0;
     width: 100%; height: 100%;
     background-color: #ffffffce;
@@ -21,15 +22,24 @@
 .provider-list .item:hover .info { background-color: transparent; }
 
 
+.provider-list .item .btn {
+    opacity: 0; bottom: 0;
+    pointer-events: none; padding: 0 20px;
+    height: 40px; line-height: 40px;
+    position: absolute; right: 30px; 
+    transition: opacity 0.25s, bottom 0.5s;
+}
+
 .provider-list .item .video { 
     pointer-events: none; opacity: 0;
     position: absolute; overflow: hidden; 
-    width: 300px; height: 200px; border-radius: 5px; z-index: 1;
-    transition: opacity 0.5s, transform 0.5s;
+    width: 250px; height: 150px; border-radius: 5px; z-index: 1;
+    box-shadow: 0 0 10px 6px #00000050;
+    transition: opacity 0.25s, transform 0.25s;
 }
-.provider-list .item .video:nth-of-type(1) { left: 20px; top: 30px; }
-.provider-list .item .video:nth-of-type(2) { left: 50px; top: 250px; }
-.provider-list .item .video:nth-of-type(3) { left: 330px; top: 120px; }
+.provider-list .item .video:nth-of-type(1) { left: 180px; top: 170px; transform: translate(50px, -50px); }
+.provider-list .item .video:nth-of-type(2) { left: 50px; top: 300px; transform: translate(-50px, 50px); }
+.provider-list .item .video:nth-of-type(3) { left: 20px; top: 30px; transform: translate(-50px, -50px); }
 
 .provider-list .item .video img { width: 100%; height: 100%; }
 .provider-list .item .video:hover .v-info { top: 30px; opacity: 1; }
@@ -39,21 +49,58 @@
     padding: 10px; background-color: #ffffffce;
     transition: top 0.5s, opacity 0.5s;
 }
+.provider-list .item .video .no-video {
+    width: 250px; height: 150px; line-height: 150px;
+    background-color: #202020; color: #fff;
+    text-align: center;
+}
 
 .provider-list .item .video .v-info p {
     font-size: 0.9em;
-    height: 6em;
+    height: 2.4em;
     line-height: 1.2em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
 .provide-box:checked + .item { height: 500px; }
 .provide-box:checked + .item .info { background: transparent }
-
+.provide-box:checked + .item .btn {
+    pointer-events: all;
+    bottom: 20px; opacity: 1;
+    transition: bottom 1s, opacity 0.5s;
+    transition-delay: 0.25s;    
+}
 .provide-box:checked + .item .video { 
     pointer-events: all; opacity: 1;
+    transition: opacity 1s, transform 1s;
+    transform: translate(0, 0);
+}
+
+.provide-box:checked + .item .video.video:nth-of-type(1) { transition-delay: 0.25s; }
+.provide-box:checked + .item .video.video:nth-of-type(2) { transition-delay: 0.5s; }
+.provide-box:checked + .item .video.video:nth-of-type(3) { transition-delay: 0.75s; }
+
+
+
+.provide-header { height: 300px; }
+.provide-header .info { background: transparent; }
+.provide-header .info .title { color: var(--red); font-weight: 900; }
+#provide-section a, #provide-section a:hover
+{ color: #fff; }
+.provide-header svg path { color: #fff; fill: #fff; }
+
+.video-list .item { padding: 20px; transition: transform 0.3s; }
+.video-list .item:hover { box-shadow: 0 0 10px 5px #00000010; transform: scale(1.05) }
+.video-list .item p {
+    line-height: 1.5em;
+    height: 7.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
 }

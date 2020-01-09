@@ -13,14 +13,21 @@ a, a:hover { text-decoration: none; color: var(--text-color); }
 
 .inline { width: 1440px; margin: 0 auto; overflow: hidden; }
 .padding { padding: 80px 10px; }
+.color-orange { color: var(--orange)!important; }
+.color-red { color: var(--red)!important; }
+.color-green { color: var(--green)!important; }
 
 .btn, .btn:hover { color: #fff; padding: 5px 25px; }
 .btn-orange { background-color: var(--orange); }
 .btn-red { background-color: var(--red); }
 
-.section-header { position: relative; margin-bottom: 60px; }
+.section-header { position: relative; padding-bottom: 20px; margin-bottom: 60px; }
 .section-header h5 { font-weight: bold; color: var(--text-color); }
 .section-header h1 { font-weight: bold; color: var(--orange); font-family: Segoe UI, sans-serif; }
+.section-header::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 30px; height: 5px; background-color: var(--orange);
+}
 
 #visual { 
     position: absolute; overflow: hidden; width: 100%; height: 100%; background: #000;
