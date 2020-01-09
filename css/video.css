@@ -14,32 +14,49 @@
 }
 .video-player .control-bar button * { color: #fff; }
 
-#time-line { margin-left: 25px; width: calc(100% - 400px); -webkit-appearance: none; background-color: transparent; }
-#time-line:focus { outline: 0; }
-#time-line::-webkit-slider-runnable-track { 
-    border-radius: 2.5px; height: 5px; background-color: #ffffff50;
+.video-player .caption {
+    position: absolute; bottom: 10%; left: 50%;
+    transform: translateX(-50%); z-index: 100;
+    background-color: #000000dd; color: #fff;
+    font-weight: bold; font-size: 2.5em;
+    padding: 10px;
 }
-#time-line::-webkit-slider-thumb {
+
+.range { 
+    margin-left: 25px; height: 5px; background-color: #ffffff50; 
+    margin: 22.5px; border-radius: 2.5px; position: relative;
+}
+.range .cursor {
+    position: absolute;
+    left: 0; top: -5px;
     width: 15px; height: 15px; 
     border-radius: 50%;
-    margin-top: -5px;
     box-shadow: 0 0 10px 5px #00000050;
     background-color: #fff;
-    -webkit-appearance: none;
+    transform: translateX(-50%);
+    cursor: pointer;
 }
+.range.rect .cursor {
+    width: 10px; height: 10px;
+    border-radius: 0px; transform: rotate(45deg) translateX(-50%);
+    top: 1px;
+}
+
+.range .progress-bar {
+    position: absolute; left: 0; top: 0;
+    width: 0%; height: 100%;
+    background-color: var(--green);
+    border-radius: 2.5px;
+    transition: none;
+}
+
+#time-line { width: calc(100% - 400px); }
+
+#volume { width: 100px; }
 .video-player .volume { width: 150px; height: 50px; display: flex; }
 .video-player .icon { width: 50px; height: 50px; line-height: 50px; text-align: center; }
 .video-player .icon * { color: #fff; }
 
-#volume-line { width: 100px; -webkit-appearance: none; background: none; }
-#volume-line:focus { outline: 0; }
-#volume-line::-webkit-slider-runnable-track { -webkit-appearance: none; height: 5px; background-color: #ffffff50; border-radius: 2.5px; }
-#volume-line::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px; height: 10px;
-    margin-top: -2px; transform: rotate(45deg);
-    background-color: #fff;
-}
 
 
 .video-info { margin-bottom: 80px; }

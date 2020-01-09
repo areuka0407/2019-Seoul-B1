@@ -53,7 +53,12 @@
             </div>
         </div>
     </div>
+
+
     <link rel="stylesheet" href="css/video.css">
+    <script src="js/Range.js"></script>
+    <script src="js/Player.js"></script>
+
     <div class="container">
         <div class="padding">
             <div class="section-header">
@@ -61,24 +66,32 @@
                 <h1>너의 이름은.</h1>
             </div>
             <div class="video-player">
-                <video src="video/toho_1.mp4"></video>
+                <video></video>
+                <p class="caption">와아─ 자막이구나!</p>
                 <div class="control-bar">
                     <button id="play-btn"><i class="fa fa-play"></i></button>
+                    <button id="pause-btn" class="hidden"><i class="fa fa-pause"></i></button>
                     <button id="stop-btn"><i class="fa fa-stop"></i></button>
-                    <input type="range" id="time-line" min="0" step="1">
+                    <div id="time-line" class="range">
+                        <div class="progress-bar"></div>
+                        <div class="cursor"></div>
+                    </div>
                     <div class="volume">
                         <div class="icon"><i class="fa fa-volume-down"></i></div>
-                        <input type="range" id="volume-line">
+                        <div id="volume" class="range rect">
+                            <div class="progress-bar" style="width: 50%;"></div>
+                            <div class="cursor" style="left: 50%;"></div>
+                        </div>
                     </div>
-                    <button id="caption-btn"><i class="fa fa-closed-captioning"></i></button>
-                    <button id="full-btn"><i class="fa fa-desktop"></i></button>
+                    <button id="caption-btn" class="muted"><i class="fa fa-closed-captioning"></i></button>
+                    <button id="full-btn" class="muted"><i class="fa fa-desktop"></i></button>
                 </div>
             </div>
             <div class="video-info mt-5">
                 <h4 class="title mb-3 font-weight-bold">너의 이름은.</h4>
                 <p class="d-inline text-muted">조회수: 3,712,891</p>
-                <p class="d-inline text-muted pl-3">게시일: 2016년 8월 26일</p>
-                <p class="mt-3 description">일본의 히다 산지 내 가공의 마을 이토모리(糸守)에 거주하는 여고생 미츠하는 시골에서의 삶에 진저리가 나서는 다음 생에 도쿄의 꽃미남으로 태어나게 해 달라는 소원을 빈다. 이후, 미츠하는 도쿄의 남고생 타키와 서로 몸이 뒤바뀐 것을 깨닫게 된다. 둘은 상대방의 휴대전화나 노트에 메모를 남기거나, 팔이나 얼굴에 낙서를 하는 등으로 서로 의사 소통을 시작한다. 미츠하는 타키가 그의 아르바이트 선배 미키와의 관계를 진전하는 것을 도와 결국 그녀와 데이트를 가게 되며, 타키는 미츠하가 그녀의 학교에서 더 인기 있도록 돕는다.\n\n미츠하와 몸이 바뀐 타키는 미츠하의 할머니와 여동생과 함께, 미츠하가 만든 제사용 술인 구치카미자케를 바치러 마을 바깥의 산 정상에 있는 신체(神体)로 향한다. 신체로 향하면서, 타키는 마을의 수호신과 인간을 서로 연결하는 무스비(結び)에 대해 듣게 된다. 미츠하는 마지막 메모에서 타키에게 그녀의 마을 축제 날에 지구와 가깝게 지나갈 혜성에 대해 이야기한다.\n\n어느 날, 타키는 그의 몸에서 갑자기 깨어난다. 오쿠데라와의 실패한 데이트가 끝나고, 그는 미츠하에게 전화를 걸지만 전화는 닿지 못하고, 이후 몸이 뒤바뀌는 것이 멈춘다. 그는 마침내 미츠하의 마을에 가기로 하지만, 마을에 대한 기억은 사라져가고, 마을의 이름도 잊게 되며, 미츠하의 메모도 사라진다. 어느 식당의 점원이 타키가 기억에 의존해 그려낸 스케치 속 마을이 이토모리임을 알아보고, 혜성의 파편이 낙하해 마을이 사라졌다는 소식을 전한다. 타키는 혜성 재해와 희생자 명단을 살펴보다 미츠하의 이름을 찾는다. 그는 둘의 시간대가 3년이 어긋나 있었던 것을 깨닫는다.</p>
+                <p class="d-inline text-muted pl-3">게시일: 3년 전</p>
+                <p class="mt-3 description">일본의 히다 산지 내 가공의 마을 이토모리(糸守)에 거주하는 여고생 미츠하는 시골에서의 삶에 진저리가 나서는 다음 생에 도쿄의 꽃미남으로 태어나게 해 달라는 소원을 빈다. 이후, 미츠하는 도쿄의 남고생 타키와 서로 몸이 뒤바뀐 것을 깨닫게 된다. 둘은 상대방의 휴대전화나 노트에 메모를 남기거나, 팔이나 얼굴에 낙서를 하는 등으로 서로 의사 소통을 시작한다. 미츠하는 타키가 그의 아르바이트 선배 미키와의 관계를 진전하는 것을 도와 결국 그녀와 데이트를 가게 되며, 타키는 미츠하가 그녀의 학교에서 더 인기 있도록 돕는다.<br><br>미츠하와 몸이 바뀐 타키는 미츠하의 할머니와 여동생과 함께, 미츠하가 만든 제사용 술인 구치카미자케를 바치러 마을 바깥의 산 정상에 있는 신체(神体)로 향한다. 신체로 향하면서, 타키는 마을의 수호신과 인간을 서로 연결하는 무스비(結び)에 대해 듣게 된다. 미츠하는 마지막 메모에서 타키에게 그녀의 마을 축제 날에 지구와 가깝게 지나갈 혜성에 대해 이야기한다.<br><br>어느 날, 타키는 그의 몸에서 갑자기 깨어난다. 오쿠데라와의 실패한 데이트가 끝나고, 그는 미츠하에게 전화를 걸지만 전화는 닿지 못하고, 이후 몸이 뒤바뀌는 것이 멈춘다. 그는 마침내 미츠하의 마을에 가기로 하지만, 마을에 대한 기억은 사라져가고, 마을의 이름도 잊게 되며, 미츠하의 메모도 사라진다. 어느 식당의 점원이 타키가 기억에 의존해 그려낸 스케치 속 마을이 이토모리임을 알아보고, 혜성의 파편이 낙하해 마을이 사라졌다는 소식을 전한다. 타키는 혜성 재해와 희생자 명단을 살펴보다 미츠하의 이름을 찾는다. 그는 둘의 시간대가 3년이 어긋나 있었던 것을 깨닫는다.</p>
                 <div class="button-group mt-4">
                     <a href="#" class="btn btn-orange">다운로드</a>
                     <a href="#" class="btn btn-orange">추천하기</a>
@@ -88,7 +101,7 @@
                 <div class="info">
                     <a class="title" href="provider.html">CJ엔터테인먼트</a>
                     <p class="text-muted mt-3">팔로워: 4,899,276명</p>
-                    <a class="btn btn-orange">팔로우<i class="ml-2 fa fa-user-plus"></i></a>
+                    <a class="btn btn-red">팔로우<i class="ml-2 fa fa-user-plus"></i></a>
                     <!-- 언팔로우 fa-user-minus -->
                 </div>
             </div>
@@ -98,7 +111,7 @@
                     <div class="form-group">
                         <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" placeholder="댓글을 입력하세요…."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-red">작성하기</button>
+                    <button type="submit" class="btn btn-orange">작성하기</button>
                 </form>
                 <div class="reply-list mt-4 py-5">
                     <div class="item d-flex">
@@ -114,6 +127,35 @@
             </div>
         </div>
     </div>
+    <script>
+        window.addEventListener("load", function(){
+            const caption = `00:01.42 ~ 00:03.95
+                            계속 무언가를 찾고 있다.
+
+                            00:05.30 ~ 00:06.70
+                            도쿄에 사는 타키
+
+                            00:07.50 ~ 00:09.00
+                            시골에 사는 미츠하
+
+                            00:12.50 ~ 00:14.10
+                            꿈 속에서 뒤바뀐 소년과 소녀
+
+                            00:27.90 ~ 00:30.10
+                            너무도 선명한 꿈
+
+                            00:44.00 ~ 00:45.50
+                            기적과 사랑의 이야기
+
+                            00:57.30 ~ 00:59.20
+                            아직 만난 적 없는 너를,
+
+                            01:27.50 ~ 01:30.20
+                            2017년 1월 대개봉`;
+            const player = new Player("video/toho_1.mp4", caption);
+        });
+    </script>
+
     <footer>
         <div class="container">
             <div class="row">
