@@ -3,8 +3,10 @@
 :root {
     --text-color: #202020;
     --orange: #E19A31;
+    --muted-orange: #e9c083;
     --green: #73BF44;
     --red: #ED3150;
+    --darkgreen: #426e27;
 }
 
 *, ::before, ::after { margin: 0; padding: 0; box-sizing: border-box; font: 16px NanumSquare, sans-serif; color: var(--text-color); }

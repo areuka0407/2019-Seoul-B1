@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-
+input[type='radio'] { display: none; }
 #video-nav { 
     max-width: 1140px; padding: 0; overflow: hidden;
     position: relative; top: -50px; height: 100px; align-items: center; 
@@ -16,18 +16,29 @@
     width: 25%; height: 100px; line-height: 100px;
     font-size: 1.1em; font-weight: bold; color: #fff;
     background-color: var(--orange); outline: 0; border: 0;
-    opacity: 0.7; transition: opacity 0.3s;
-    position: relative; z-index: 1;
+    opacity: 0.7; transition: opacity 0.3s; margin: 0; 
+    position: relative; z-index: 1; text-align: center;
+    cursor: pointer;
 }
 
 #video-nav .nav-item:hover { background-color: var(--red); opacity: 0.8; }
-#video-nav .nav-item.active { background-color: var(--green); opacity: 1; font-size: 1.3em; }
+
+#radio-detail:checked ~ #video-nav .nav-item:nth-child(1),
+#radio-analizer:checked ~ #video-nav .nav-item:nth-child(2),
+#radio-modify:checked ~ #video-nav .nav-item:nth-child(3),
+#radio-reply:checked ~ #video-nav .nav-item:nth-child(4)
+{ background-color: var(--green); opacity: 1; font-size: 1.3em; }
 
 
 @media(max-width: 1140px) {
     #video-nav { max-width: 100%; border-radius: 0; height: 80px; }
     #video-nav .nav-item { height: 80px; line-height: 80px; }
 }
+
+#radio-detail:checked ~ #page-list > div { left: 0; }
+#radio-analizer:checked ~ #page-list > div { left: -100%; }
+#radio-modify:checked ~ #page-list > div { left: -200%; }
+#radio-reply:checked ~ #page-list > div { left: -300%; }
 
 
 #page-list { position: relative; width: 100%; height: 800px; margin-bottom: 80px; overflow: hidden; }
@@ -40,10 +51,37 @@
 #graph { margin: 0 auto; border: 2px solid #ddd; }
 
 #modify .contents { width: 1140px; margin: 0 auto; }
-#modify .contents .viewport {  width: 1140px; height: 500px; background-color: #000; position: relative; }
-#modify .contents .scene-line, #modify .contents .voice-line {  width: 1140px; height: 100px; border: 1px solid #ddd; display: flex; }
+#modify .contents .viewport {  width: 1140px;  height: 500px; background-color: #000; position: relative; }
+#modify .contents .viewport .input-line {
+    position: absolute; left: 0; bottom:0; padding: 10px 0;
+    display: flex; align-items: center; justify-content: space-between; width: 100%; height: 60px; 
+    background-color: rgb(241, 241, 241); 
+}
 
-#modify .input-box {
-     position: fixed; width: 500px; height: 500px; background-color: #fff;
-     right: 50px; bottom: 50px; box-shadow: 0 0 10px 6px #00000030;
+#modify .contents .viewport .input-line label { height: 40px; line-height: 50px; display: inline-block; }
+#modify .contents .viewport .input-line input { height: 40px; margin-left: 10px; padding: 0 10px; }
+#modify .contents .viewport .input-line button { height: 40px; }
+#modify .contents .viewport .input-line .group:first-child input { width: 100px; }
+#modify .contents .viewport .input-line .group:last-child input { width: 500px; }
+#modify .contents .viewport #caption 
+{ 
+    position: absolute; left: 50%; bottom: 15%; transform: translateX(-50%);
+    font-weight: 900; color: #fff; background-color: #000000aa;
+    font-size: 1.5em; padding: 10px 20px;
+}
+
+#modify .contents .scene-line, #modify .contents .voice-line {  width: 1140px;  height: 100px; border: 1px solid #ddd; display: flex; }
+
+
+.reply-list .item { position: relative; border: 1px solid #ddd; padding: 30px; border-bottom: 0; overflow: hidden; border-radius: 10px; }
+.reply-list .item:last-child { border-bottom: 1px solid #ddd; }
+
+.reply-list .item::after {
+    content: '댓글을 삭제하려면 클릭하세요!'; position: absolute; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: #000000aa;
+    color: #fff; font-weight: 900; font-size: 1.5em;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; transition: opacity 0.5s;
  }
+ .reply-list .item:hover::after { opacity: 1; transition: opacity 0.3s; }
+
