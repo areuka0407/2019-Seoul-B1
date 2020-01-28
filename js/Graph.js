@@ -23,6 +23,7 @@ class Graph {
     }
     loadViewCount(){
         return new Promise(res => {
+            // 나중에 C과제때엔 AJAX로 변경
             let viewData = data.view_history
                 .filter(x => x.video_idx == this.video_id)
                 .map(x => {

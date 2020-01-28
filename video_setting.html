@@ -143,12 +143,14 @@
             </div>
         </div>
     </div>
-    
+   
     <script src="js/data.js"></script>
     <script src="js/Graph.js"></script>
     <script src="js/CaptionModify.js"></script>
     <script>
-        window.addEventListener("load", () => {
+        document.querySelector("#radio-modify").addEventListener("change", e => {
+            if(e.target.checked == false) return;
+
             const video_id = "27";
 
             const graph = new Graph(video_id, "#graph");

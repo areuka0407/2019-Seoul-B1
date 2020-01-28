@@ -3,6 +3,10 @@ class CaptionModify {
         this.video_id = video_id;
         this.segmentOfImages = 8;
 
+        this.$loading = document.createElement("div");
+        this.$loading.id = "loading";
+        this.$loading.innerHTML = `<i class="fa-6x fas fa-spinner fa-spin"></i>`;
+
         this.$root = document.querySelector(modify_selector);
         this.$sceneLine = this.$root.querySelector(".scene-line");
         this.$voiceLine = this.$root.querySelector(".voice-line");
@@ -27,9 +31,11 @@ class CaptionModify {
     }
 
     async loadData(){
+        document.body.append(this.$loading); // 로딩 아이콘 Show
+
         this.videoData = await this.loadVideoData();
         await this.loadScene();
-        await this.loadVoiceData();
+        this.loadVoiceData();
     }
     loadVideoData(){
         return new Promise(res => {
@@ -40,6 +46,8 @@ class CaptionModify {
     }
     loadScene(){
         return new Promise(res => {
+            this.$sceneLine.innerHTML = "";
+
             let timeUnit = this.$video.duration / (this.segmentOfImages - 1);
             let iw = this.$sceneLine.offsetWidth / this.segmentOfImages;
 
@@ -73,42 +81,27 @@ class CaptionModify {
         });
     }
     loadVoiceData(){
-        return new Promise(res => {
-            let ctx = this.$v_canvas.getContext("2d");
-            ctx.strokeStyle = "#E19A31";
-            ctx.lineWidth = 1;
+        const audioCtx = new AudioContext();
 
-            let audio_ctx = new AudioContext();
-            let src = audio_ctx.createMediaElementSource(this.$video);
-            let analyser = audio_ctx.createAnalyser();
+        const loadBuffer = new Promise(res => {
+            // 영상을 array buffer로 읽은 뒤 반환한다.
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = "arraybuffer";
+            xhr.open("GET", this.$video.src);
+            xhr.send();
+            xhr.onload = () => res(xhr.response);
+        })
 
-            src.connect(analyser);
-            src.connect(audio_ctx.destination);
-
-            const dataLength = 256;
-            analyser.fftSize = dataLength;
-            let data_array = new Uint8Array(dataLength);
-
-            let a_frame = () => {
-                if(this.$video.currentTime < this.$video.duration) requestAnimationFrame(() => a_frame());
-                else res();
-                analyser.getByteFrequencyData(data_array);
-
-                let x = this.$voiceLine.offsetWidth * this.$video.currentTime / this.$video.duration;
-                let y = this.$voiceLine.offsetHeight * data_array.reduce((p, c) => p + c) / (256 * 100);
-
-                ctx.beginPath();
-                ctx.moveTo(x, 50 - y / 2);
-                ctx.lineTo(x, 50 + y / 2);
-                ctx.closePath();
-                ctx.stroke();
-            };
-
-            a_frame();    
-            // this.$video.volume = 0;
-            this.$video.playbackRate = this.$video.duration / 10;
-            this.$video.play();
-        });
+        loadBuffer.then((videoData) => audioCtx.decodeAudioData(videoData))
+                .then(audioData => {
+                    const offscreen = this.$v_canvas.transferControlToOffscreen();
+                    const channel = audioData.getChannelData(0);
+                    const worker = new Worker("/js/rendering-worker.js");
+                    worker.postMessage({canvas: offscreen, data: channel}, [offscreen]);
+                    worker.onmessage = (e) => {
+                        this.$loading.remove(); // 로딩 아이콘 Hide
+                    };
+                });
     }
 
 
