@@ -148,13 +148,17 @@
     <script src="js/Graph.js"></script>
     <script src="js/CaptionModify.js"></script>
     <script>
+        const video_id = "27";
+
+        let graph, modify;
+        document.querySelector("#radio-analizer").addEventListener("change", e => {
+            if(e.target.checked == false || graph) return;
+            graph = new Graph(video_id, "#graph");
+        });
+
         document.querySelector("#radio-modify").addEventListener("change", e => {
-            if(e.target.checked == false) return;
-
-            const video_id = "27";
-
-            const graph = new Graph(video_id, "#graph");
-            const modify = new CaptionModify(video_id, "#modify");
+            if(e.target.checked == false || modify) return;
+            modify = new CaptionModify(video_id, "#modify");
         });
     </script>
 

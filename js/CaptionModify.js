@@ -34,7 +34,7 @@ class CaptionModify {
         document.body.append(this.$loading); // 로딩 아이콘 Show
 
         this.videoData = await this.loadVideoData();
-        await this.loadScene();
+        this.loadScene();
         this.loadVoiceData();
     }
     loadVideoData(){
