@@ -61,22 +61,26 @@ class CaptionModify {
             video.height = this.$video.height;
             
             video.src = "video/" + this.videoData.video;
+        
             video.onloadedmetadata = async () => {
                 for(let i = 0; i < this.segmentOfImages; i++){
                     await (() => new Promise(res => {
                         video.currentTime = timeUnit * i;
-                        video.addEventListener("seeked", () => res());
+                        setTimeout(() => loadImage.apply(this, [res]), 500);
+                        
                     }))();
                 }
                 res();
             }
-            video.onseeked = () => {
+
+            function loadImage(res){
                 ctx.drawImage(video, 0, 0, this.$video.width, this.$video.height);
                 let image = new Image();
                 image.width = iw;
                 image.height = 100;
                 image.src = canvas.toDataURL("image/jpeg");
                 this.$sceneLine.append(image);
+                res();
             }
         });
     }

@@ -14,7 +14,7 @@ class Graph {
 
         this.loadData().then(() => {
             this.drawTemplate();
-            this.drawLine();
+            this.drawLine2();
         });
     }
 
@@ -198,8 +198,8 @@ class Graph {
         for (let i = 0; i < viewData.length - 1; i++) {
             let xCenter = (viewData[i].x + viewData[i + 1].x) / 2;
             let yCenter = (viewData[i].y + viewData[i + 1].y) / 2;
-            let cp_x1 = (xCenter + viewData[i].x) / 2;
-            let cp_x2 = (xCenter + viewData[i + 1].x) / 2;
+            let cp_x1 = (xCenter + viewData[i].x) / 2;  // 중점과 시작점 사이의 중간 X값
+            let cp_x2 = (xCenter + viewData[i + 1].x) / 2; // 중점과 다음점 사이의 중간 X값
             //두 점의 중점으로 베지어를 그리고
             ctx.quadraticCurveTo(cp_x1, viewData[i].y, xCenter, yCenter); 
             debugPoint.push({x:cp_x1, y:viewData[i].y});
